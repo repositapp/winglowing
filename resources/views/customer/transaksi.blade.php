@@ -1,0 +1,224 @@
+@extends('layouts.first')
+@section('title')
+    Keranjang
+@endsection
+@section('content')
+    <!-- Start Wishlist Area -->
+    <section class="mt-whislist-area mt-whislist-bg pt-60 pb-50 p-relative "
+        data-background="{{ URL::asset('dist/img/bg/wishlist-bg.png') }}" style="padding-bottom: 60px;">
+        <div class="container">
+            <div class="mt-whislist-space">
+                <div class="row ">
+                    <div class="col-12 ">
+                        <div class="mt-whislist ">
+                            <form action="#">
+                                <div class="table-content table-responsive">
+                                    <table class="table">
+                                        <thead class="mt-whislist-header">
+                                            <tr>
+                                                <th class="product-thumbnail">Kode Transaksi</th>
+                                                <th class="cart-product-name">Nama Pelanggan</th>
+                                                <th class="product-price"> Total Bayar</th>
+                                                <th class="product-quantity">Metode Bayar</th>
+                                                <th class="product-quantity">Status</th>
+                                                <th class="product-subtotal">Tanggal</th>
+                                                <th class="product-remove">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse ($transaksis as $transaksi)
+                                                <tr>
+                                                    <td class="mt-whislist-thumbnail">
+                                                        {{ $transaksi->kode_transaksi }}
+                                                    </td>
+                                                    <td class="mt-whislist-name">
+                                                        {{ $transaksi->biodata->nama_lengkap ?? '-' }}
+                                                    </td>
+                                                    <td class="mt-whislist-price">
+                                                        <span
+                                                            class="amount">Rp{{ number_format($transaksi->grand_total, 0, ',', '.') }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="mt-whislist-info">
+                                                            <span>{{ ucfirst($transaksi->status) }}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        {{ $transaksi->metode_pembayaran }}
+                                                    </td>
+                                                    <td>
+                                                        {{ \Carbon\Carbon::parse($transaksi->created_at)->format('d M Y') }}
+                                                    </td>
+                                                    <td class="mt-whislist-remove">
+                                                        <a
+                                                            href="{{ route('transaksi.detail', $transaksi->kode_transaksi) }}">
+                                                            <i class="fa-solid fa-eye"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="7" class="text-center">
+                                                        Data Transaksi belum Tersedia.
+                                                    </td>
+                                                </tr>
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                    <div class="container">
+                                        <div
+                                            class="mt-pagination-wrap d-flex align-items-center justify-content-between mt-20 flex-wrap">
+                                            <div class="mt-pagination mb-20">
+                                                {{-- Tombol Prev --}}
+                                                @if ($transaksis->onFirstPage())
+                                                    <span class="button disabled"><i class="fa-regular fa-chevron-left"></i>
+                                                        Prev</span>
+                                                @else
+                                                    <a href="{{ $transaksis->previousPageUrl() }}" class="button">
+                                                        <i class="fa-regular fa-chevron-left"></i> Prev
+                                                    </a>
+                                                @endif
+
+                                                {{-- Nomor Halaman --}}
+                                                @for ($i = 1; $i <= $transaksis->lastPage(); $i++)
+                                                    @if ($i == $transaksis->currentPage())
+                                                        <a href="#" class="active">{{ $i }}</a>
+                                                    @elseif ($i == 1 || $i == $transaksis->lastPage() || abs($transaksis->currentPage() - $i) <= 2)
+                                                        <a href="{{ $transaksis->url($i) }}">{{ $i }}</a>
+                                                    @elseif ($i == 2 || $i == $transaksis->lastPage() - 1)
+                                                        <span>...</span>
+                                                    @endif
+                                                @endfor
+
+                                                {{-- Tombol Next --}}
+                                                @if ($transaksis->hasMorePages())
+                                                    <a href="{{ $transaksis->nextPageUrl() }}" class="button">
+                                                        Next <i class="fa-regular fa-chevron-right"></i>
+                                                    </a>
+                                                @else
+                                                    <span class="button disabled">Next <i
+                                                            class="fa-regular fa-chevron-right"></i></span>
+                                                @endif
+                                            </div>
+
+                                            <div class="mt-pagination-sort mb-20">
+                                                <div class="ddd">
+                                                    <span>
+                                                        Menampilkan {{ $transaksis->firstItem() }} hingga
+                                                        {{ $transaksis->lastItem() }} dari {{ $transaksis->total() }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Wishlist Area -->
+
+    <!-- Start Popular Product Area -->
+    <section class="mtpopular__product-area mtpopular__product-2 pt-60 pb-50 p-relative fix">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="mt-section-content mb-30">
+                        <h3 class="mt-section-title">
+                            Produk
+                            <span>Lainnya</span>
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 18 20"
+                                    fill="none">
+                                    <path
+                                        d="M9 1.82196L10.429 6.82929L10.5619 7.29477L11.0314 7.17707L16.0824 5.91098L12.4604 9.65222L12.1237 10L12.4604 10.3478L16.0824 14.089L11.0314 12.8229L10.5619 12.7052L10.429 13.1707L9 18.178L7.57097 13.1707L7.43813 12.7052L6.9686 12.8229L1.91761 14.089L5.53957 10.3478L5.87627 10L5.53957 9.65222L1.91761 5.91098L6.9686 7.17707L7.43813 7.29477L7.57097 6.82929L9 1.82196Z"
+                                        fill="#FDD057" stroke="#060121" />
+                                </svg>
+                            </span>
+                        </h3>
+                        <p>Jika anda ingin melanjutkan belanja <br> Silahkan Temukan Produk Lain yang Anda Sukai </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 ">
+                    <div class="mtpopular__product-arrow text-end">
+                        <div class="mtpopular__product-slider-left1">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14"
+                                    fill="none">
+                                    <path
+                                        d="M7.39367 0.820693C6.37396 5.14484 1.88 6.84235 1.46856 6.98943C1.4577 6.99331 1.45706 7.00855 1.4676 7.01347C1.87294 7.20245 6.37316 9.37583 7.39367 13.1793M14.54 7.00001L2.62943 7.00001"
+                                        stroke="#060121" stroke-width="2" />
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="mtpopular__product-slider-right1">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14"
+                                    fill="none">
+                                    <path
+                                        d="M7.60633 13.1793C8.62604 8.85516 13.12 7.15765 13.5314 7.01057C13.5423 7.00669 13.5429 6.99145 13.5324 6.98653C13.1271 6.79755 8.62684 4.62417 7.60633 0.820679M0.459961 6.99999L12.3706 6.99999"
+                                        stroke="#060121" stroke-width="2" />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mtpopular__product-wrap">
+                <div class="swiper mtpopular_product_2_active">
+                    <div class="swiper-wrapper">
+                        @foreach ($produkAcak as $produk)
+                            <div class="swiper-slide">
+                                <div class="mthot__product-item-wrap ">
+                                    <div class="mthot__product-item p-relative fix">
+                                        <div class="mthot__product-img mb-10">
+                                            @if ($produk->discount > 0)
+                                                <div class="mtfeature__product-offer">
+                                                    <span>{{ $produk->discount }}% OFF</span>
+                                                </div>
+                                            @endif
+                                            <div class="mtfeature__product-img mb-15">
+                                                <a href="{{ route('produk.detail', $produk->kode_produk) }}"><img
+                                                        src="{{ asset('storage/' . $produk->gambarUtama->gambar) }}"
+                                                        alt="Gambar Produk" width="90%"></a>
+                                            </div>
+                                        </div>
+                                        <div class="mthot__product-content">
+                                            <div
+                                                class="mthot__product-ratcat mb-10 d-flex align-items-center justify-content-between">
+                                                <div class="mthot__product-cate ">
+                                                    <span>{{ $produk->kategori->name }}</span>
+                                                </div>
+                                            </div>
+                                            <h6 class="mthot__product-title mb-30 ">
+                                                <a
+                                                    href="{{ route('produk.detail', $produk->kode_produk) }}">{{ $produk->nama_produk }}</a>
+                                            </h6>
+                                            <div
+                                                class="mthot__product-price-wrap d-flex align-items-center justify-content-between">
+                                                <div class="mthot__product-price">
+                                                    @if ($produk->discount > 0)
+                                                        <span>Rp.
+                                                            {{ number_format($produk->price - ($produk->price * $produk->discount) / 100, 0, ',', '.') }}</span>
+                                                        <del>Rp. {{ number_format($produk->price, 0, ',', '.') }}</del>
+                                                    @else
+                                                        <span>Rp. {{ number_format($produk->price, 0, ',', '.') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Popular Product Area -->
+@endsection
