@@ -6,12 +6,15 @@ use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\OngkirController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use UniSharp\LaravelFilemanager\Lfm;
+
 
 
 /*
@@ -85,7 +88,19 @@ Route::prefix('admin')->middleware('auth:web')->group(function () {
     Route::put('/transaksi/update/{kode_transaksi}', [TransaksiController::class, 'updateStatus'])->name('transaksi.update');
     Route::put('/transaksi/cancel/{kode_transaksi}', [TransaksiController::class, 'cancel'])->name('transaksi.cancel');
     Route::get('/transaksi/invoice/{kode_transaksi}', [TransaksiController::class, 'cetakInvoice'])->name('transaksi.invoice');
+    // Laporan
+    Route::prefix('laporan')->name('laporan.')->group(function () {
+        Route::get('/products', [LaporanController::class, 'productReport'])->name('products');
+        Route::get('/products/print', [LaporanController::class, 'printProductReport'])->name('products.print');
+        Route::get('/low-stock', [LaporanController::class, 'lowStockReport'])->name('low_stock');
+        Route::get('/low-stock/print', [LaporanController::class, 'printLowStockReport'])->name('low_stock.print');
+        Route::get('/sales', [LaporanController::class, 'salesReport'])->name('sales');
+        Route::get('/sales/print', [LaporanController::class, 'printSalesReport'])->name('sales.print');
+        Route::get('/financial', [LaporanController::class, 'financialReport'])->name('financial');
+        Route::get('/financial/print', [LaporanController::class, 'printFinancialReport'])->name('financial.print');
+    });
     // Settings
+    Route::resource('users', UserController::class)->except(['show']);
     Route::resource('aplikasi', AplikasiController::class)->except(['show', 'create', 'store', 'destroy', 'edit']);
 });
 

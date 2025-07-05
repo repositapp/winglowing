@@ -72,7 +72,7 @@
                     </li>
                 </ul>
             </li>
-            {{-- <li class="treeview">
+            <li class="treeview {{ Request::is('admin/laporan*') ? 'active menu-open' : '' }}">
                 <a href="#">
                     <i class="fa fa-print"></i> <span>Laporan</span>
                     <span class="pull-right-container">
@@ -80,10 +80,20 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="../UI/general.html"><i class="fa fa-circle-o"></i> Data Pembayaran</a></li>
-                    <li><a href="../UI/icons.html"><i class="fa fa-circle-o"></i> Data Pengeluaran</a></li>
+                    <li class="{{ Request::is('admin/laporan/products') ? 'active' : '' }}"><a
+                            href="{{ route('laporan.products') }}"><i class="fa fa-circle-o"></i> Laporan Produk</a>
+                    </li>
+                    <li class="{{ Request::is('admin/laporan/low_stock') ? 'active' : '' }}"><a
+                            href="{{ route('laporan.low_stock') }}"><i class="fa fa-circle-o"></i> Laporan Stok
+                            Menipis</a></li>
+                    <li class="{{ Request::is('admin/laporan/sales') ? 'active' : '' }}"><a
+                            href="{{ route('laporan.sales') }}"><i class="fa fa-circle-o"></i> Laporan Penjualan</a>
+                    </li>
+                    <li class="{{ Request::is('admin/laporan/financial') ? 'active' : '' }}"><a
+                            href="{{ route('laporan.financial') }}"><i class="fa fa-circle-o"></i> Laporan Keuangan</a>
+                    </li>
                 </ul>
-            </li> --}}
+            </li>
             <li class="header">More</li>
             <li
                 class="treeview {{ Request::is('admin/users*', 'admin/kategori_upz*', 'admin/golongan_mustahik*', 'admin/zakat*', 'admin/aplikasi*', 'admin/bank*') ? 'active menu-open' : '' }}">
@@ -94,8 +104,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    {{-- <li class="{{ Request::is('admin/users*') ? 'active' : '' }}"><a href=""><i
-                                class="fa fa-circle-o"></i> Akun Pengguna</a></li> --}}
+                    <li class="{{ Request::is('admin/users*') ? 'active' : '' }}"><a
+                            href="{{ route('users.index') }}"><i class="fa fa-circle-o"></i> Akun Pengguna</a></li>
                     <li class="{{ Request::is('admin/aplikasi*') ? 'active' : '' }}"><a
                             href="{{ route('aplikasi.index') }}"><i class="fa fa-circle-o"></i> Aplikasi</a></li>
                 </ul>

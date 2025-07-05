@@ -43,83 +43,88 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Aplikasi::updateOrCreate([
-            'nama_toko' => 'Arumi Galery',
-            'telepon' => '0401-221522',
-            'email' => 'launawolio@gmail.com',
-            'instagram' => '@sentuhan_buton',
-            'tiktok' => '@sentuhan_buton',
-            'alamat' => 'Jl. Bhakti Abri, Kel. Bukit Wolio Indah, Kec. Wolio, Kota Bau-Bau, Sulawesi Tenggara 93713',
-            'maps' => '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d834.930680904558!2d122.61416022333478!3d-5.474163351408725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2da4770bb8dc6fc7%3A0x9fdf22ba0c1dcf19!2sArumi%20Galeri!5e0!3m2!1sid!2sid!4v1750669010062!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
-            'nama_pemilik' => 'Arumi',
-            'sidebar_lg' => 'Arumi Galery',
-            'sidebar_mini' => 'AG',
+            'nama_toko' => 'Win Glowing',
+            'telepon' => '085827894096',
+            'email' => 'win.glowing@gmail.com',
+            'instagram' => '@win.glowing',
+            'tiktok' => '@win.glowing',
+            'alamat' => 'Jl. Sultan Jl. Dayanu Ikhsanudin No.19, Katobengke, Kec. Betoambari, Kota Bau-Bau, Sulawesi Tenggara 93724',
+            'maps' => '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d510.99555313015713!2d122.58137885511219!3d-5.479276799877992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2da4718720b8a115%3A0xad6b94a44840a278!2sWin.Glowing!5e0!3m2!1sid!2sid!4v1751629922615!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
+            'nama_pemilik' => 'Edwin',
+            'sidebar_lg' => 'Win Glowing',
+            'sidebar_mini' => 'WG',
             'title_header' => 'Sistem Informasi Penjualan',
             'logo' => 'aplikasi-images/onlineshop.jpg',
         ]);
 
         Kategori::updateOrCreate([
-            'name' => 'Sarung Pria',
-            'slug' => 'sarung-pria',
+            'name' => 'Cleanser',
+            'slug' => 'cleanser',
             'image_kategori' => 'kategori-images/default.jpg',
         ]);
         Kategori::updateOrCreate([
-            'name' => 'Sarung Wanita',
-            'slug' => 'sarung-wanita',
+            'name' => 'Toner',
+            'slug' => 'toner',
             'image_kategori' => 'kategori-images/default.jpg',
         ]);
         Kategori::updateOrCreate([
-            'name' => 'Tas Samping',
-            'slug' => 'tas-samping',
+            'name' => 'Moisturizer',
+            'slug' => 'moisturizer',
             'image_kategori' => 'kategori-images/default.jpg',
         ]);
         Kategori::updateOrCreate([
-            'name' => 'Ransel',
-            'slug' => 'ransel',
+            'name' => 'Serum',
+            'slug' => 'serum',
             'image_kategori' => 'kategori-images/default.jpg',
         ]);
         Kategori::updateOrCreate([
-            'name' => 'Baju Pria',
-            'slug' => 'baju-pria',
+            'name' => 'Sunscreen',
+            'slug' => 'sunscreen',
             'image_kategori' => 'kategori-images/default.jpg',
         ]);
         Kategori::updateOrCreate([
-            'name' => 'Baju Wanita',
-            'slug' => 'baju-wanita',
+            'name' => 'Masker Wajah',
+            'slug' => 'masker-wajah',
             'image_kategori' => 'kategori-images/default.jpg',
         ]);
         Kategori::updateOrCreate([
-            'name' => 'Aksesoris Pria',
-            'slug' => 'aksesoris-pria',
+            'name' => 'Krim Mata',
+            'slug' => 'krim-mata',
             'image_kategori' => 'kategori-images/default.jpg',
         ]);
         Kategori::updateOrCreate([
-            'name' => 'Aksesoris Wanita',
-            'slug' => 'aksesoris-wanita',
+            'name' => 'Eksfoliator Wajah',
+            'slug' => 'eksfoliator-wajah',
+            'image_kategori' => 'kategori-images/default.jpg',
+        ]);
+        Kategori::updateOrCreate([
+            'name' => 'Perawatan Tubuh',
+            'slug' => 'perawatan-tubuh',
             'image_kategori' => 'kategori-images/default.jpg',
         ]);
 
         Rekening::updateOrCreate([
             'nama_bank' => 'BRI',
             'rekening' => '1823717238123',
-            'pemilik' => 'Arumi Galeri',
+            'pemilik' => 'Win Glowing',
             'logo_bank' => 'bank-images/bri.png',
         ]);
         Rekening::updateOrCreate([
             'nama_bank' => 'BCA',
             'rekening' => '1823717238213',
-            'pemilik' => 'Arumi Galeri',
+            'pemilik' => 'Win Glowing',
             'logo_bank' => 'bank-images/bca.png',
         ]);
         Rekening::updateOrCreate([
             'nama_bank' => 'BSI',
             'rekening' => '3743717238123',
-            'pemilik' => 'Arumi Galeri',
+            'pemilik' => 'Win Glowing',
             'logo_bank' => 'bank-images/bsi.png',
         ]);
         Rekening::updateOrCreate([
             'nama_bank' => 'Mandiri',
             'rekening' => '1823713288123',
-            'pemilik' => 'Arumi Galeri',
+            'pemilik' => 'Win Glowing',
             'logo_bank' => 'bank-images/mandiri.webp',
         ]);
 
@@ -137,7 +142,7 @@ class DatabaseSeeder extends Seeder
             'city_id' => 1,
             'district_id' => 8,
             'village_id' => 1,
-            'alamat' => 'Jl. Moh. Husni Thamrin, Wale, Kec. Wolio, Kota Bau-Bau',
+            'alamat' => 'Jl. Sultan Jl. Dayanu Ikhsanudin No.19, Katobengke, Kec. Betoambari, Kota Bau-Bau',
             'kode_pos' => '93711',
             'telepon' => '081222452210',
         ]);
@@ -148,7 +153,7 @@ class DatabaseSeeder extends Seeder
             'city_id' => 1,
             'district_id' => 8,
             'village_id' => 1,
-            'alamat' => 'Jl. Moh. Husni Thamrin, Wale, Kec. Wolio, Kota Bau-Bau',
+            'alamat' => 'Jl. Sultan Jl. Dayanu Ikhsanudin No.19, Katobengke, Kec. Betoambari, Kota Bau-Bau',
             'kode_pos' => '93711',
             'telepon' => '081222452210',
         ]);
