@@ -143,9 +143,15 @@ class TransaksiController extends Controller
 
         $grand_total = $total + $ongkir;
 
+        if ($request->rekening_id == 'Pilih Rekening') {
+            $rekening = null;
+        } else {
+            $rekening = $request->rekening_id;
+        }
+
         Transaksi::create([
             'user_id' => $user->id,
-            'rekening_id' => $request->rekening_id,
+            'rekening_id' => $rekening,
             'metode_pembayaran' => $request->metode_pembayaran,
             'kode_transaksi' => $kode_transaksi,
             'total' => $total,
@@ -167,10 +173,10 @@ class TransaksiController extends Controller
             ]);
         }
 
-        // Keranjang::where('user_id', $user->id)->delete();
+        Keranjang::where('user_id', $user->id)->delete();
 
         if ($request->metode_pembayaran == 'cod') {
-            return redirect()->route('transaksi.detail')->with('success', 'Transaksi berhasil!');
+            return redirect()->route('transaksi.list')->with('success', 'Transaksi berhasil!');
         } else {
             return redirect()->route('checkout.pay', $kode_transaksi)->with('success', 'Silahkan kirim bukti transfer anda!');
         }
