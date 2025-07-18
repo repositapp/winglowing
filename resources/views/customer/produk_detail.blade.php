@@ -107,7 +107,7 @@
                             <div class="mt-shop-details__product-box-item d-flex align-items-center ">
                                 <div class="mt-shop-details__product-box-text">
                                     <h3 class="mt-content-tab-title mb-10">Deskripsi Produk</h3>
-                                    <p>{{ $produk->description }}</p>
+                                    <p>{!! $produk->description !!}</p>
                                 </div>
                             </div>
                         </div>
