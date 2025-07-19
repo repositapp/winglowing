@@ -16,39 +16,36 @@ class CityDistrictVillageSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create('id_ID');
-
         // Buat kota Baubau
         $baubau = City::firstOrCreate(['name' => 'Baubau']);
 
-        // Daftar kecamatan Baubau
-        $kecamatans = [
-            'Betoambari',
-            'Murhum',
-            'Batupoaro',
-            'Kokalukuna',
-            'Bungi',
-            'Lea-Lea',
-            'Sorawolio',
-            'Wolio'
+        // Daftar kecamatan beserta kelurahannya
+        $data = [
+            'Batupoaro' => ['Bonebone', 'Kaobula', 'Lanto', 'Nganganaumala', 'Tarafu', 'Wameo'],
+            'Betoambari' => ['Katobengke', 'Labalawa', 'Lipu', 'Sulaa', 'Waborobo'],
+            'Bungi' => ['Kampeonaho', 'Liabuku', 'Ngkari-Ngkari', 'Tampuna', 'Waliabuku'],
+            'Kokalukuna' => ['Kadolo', 'Kadolomoko', 'Lakologou', 'Liwuto', 'Sukanaeyo', 'Waruruma'],
+            'Lea-Lea' => ['Kalia-Lia', 'Kantalai', 'Kolese', 'Lowu-Lowu', 'Palabusa'],
+            'Murhum' => ['Baadia', 'Lamangga', 'Melai', 'Tanganapada', 'Wajo'],
+            'Sorawolio' => ['Bugi', 'Gonda Baru', 'Kaisabu Baru', 'Karya Baru'],
+            'Wolio' => ['Bataraguru', 'Batulo', 'Bukit Wolio Indah', 'Kadolokatapi', 'Tomba', 'Wale', 'Wangkanapi']
         ];
 
-        foreach ($kecamatans as $kecamatan) {
+        foreach ($data as $kecamatan => $kelurahans) {
             $district = District::create([
                 'city_id' => $baubau->id,
                 'name' => $kecamatan
             ]);
 
-            // Buat kelurahan secara acak untuk tiap kecamatan
-            for ($i = 0; $i < 5; $i++) {
+            foreach ($kelurahans as $kelurahan) {
                 Village::create([
                     'city_id' => $baubau->id,
                     'district_id' => $district->id,
-                    'name' => $faker->unique()->streetName
+                    'name' => $kelurahan
                 ]);
             }
         }
 
-        $this->command->info('✅ Kota, Kecamatan, dan Kelurahan Baubau berhasil dibuat!');
+        $this->command->info('✅ Data Kota Baubau beserta Kecamatan dan Kelurahan berhasil dibuat!');
     }
 }
