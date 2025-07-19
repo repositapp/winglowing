@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\City;
 use App\Models\District;
 use App\Models\Village;
 use Faker\Factory as Faker;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CityDistrictVillageSeeder extends Seeder
 {
@@ -16,6 +17,17 @@ class CityDistrictVillageSeeder extends Seeder
      */
     public function run(): void
     {
+        // Nonaktifkan pengecekan foreign key sementara
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        // Kosongkan isi tabel yang terkait
+        Village::truncate();
+        District::truncate();
+        City::truncate();
+
+        // Aktifkan kembali pengecekan foreign key
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         // Buat kota Baubau
         $baubau = City::firstOrCreate(['name' => 'Baubau']);
 
